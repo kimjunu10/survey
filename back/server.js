@@ -73,3 +73,7 @@ app.post('/api/reservations', (req, res) => {
 app.listen(port, () => {
     console.log(`서버가 포트 ${port}번에서 실행 중입니다.`);
 });
+
+app.get('/ping', (req, res) => {
+    res.status(200).send('Server is alive');
+});
