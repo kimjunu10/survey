@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🤖 증상 입력만 하면 AI가 진료과와 병원을 안내합니다!</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+            overflow-x: hidden;
+        }
+
+        section {
+            padding: 6rem 0;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .hover-scale:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+
+        .pulse {
+            animation: pulse-animation 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+        }
+
+        @keyframes pulse-animation {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .blob {
+            background: linear-gradient(to right, #8b5cf6, #ec4899);
+            border-radius: 50%;
+            width: 200px;
+            height: 200px;
+            filter: blur(50px);
+            position: absolute;
+            animation: moveBlobs 10s infinite alternate;
+        }
+
+        .blob:nth-child(2) {
+            background: linear-gradient(to right, #22d3ee, #a855f7);
+            width: 300px;
+            height: 300px;
+            top: 70%;
+            left: 80%;
+        }
+
+        .blob:nth-child(3) {
+            background: linear-gradient(to right, #f97316, #eab308);
+            width: 250px;
+            height: 250px;
+            top: 20%;
+            left: 10%;
+        }
+
+        @keyframes moveBlobs {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(50px, 50px);
+            }
+        }
+        .bg-gradient-custom {
+            background: linear-gradient(45deg, #6366f1, #a855f7, #ec4899);
+        }
+        .feature-card {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="blob" style="top:10%; left:10%;"></div>
+    <div class="blob" style="top:30%; left:60%;"></div>
+    <div class="blob" style="top:80%; left:80%;"></div>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative py-24 overflow-hidden">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6 fade-in">
+                채팅만 치면 AI가 진료과와 병원을 안내합니다!
+            </h1>
+            <p class="text-lg text-gray-700 mb-8 fade-in">
+                "옆구리가 찌르듯 아픈데 어디 병원 가야 할까요?"<br>
+                그런 고민은 이제 그만! 채팅으로 증상을 입력하면 관련 진료과, 병원, 가능성 있는 질환까지 빠르게 안내해드립니다.
+            </p>
+            <button 
+                class="bg-gradient-custom text-white font-bold py-3 px-8 rounded-full hover:bg-blue-700 hover-scale pulse fade-in"
+                onclick="scrollToSection('contact')"
+            >
+                지금 바로 시작하기
+            </button>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-gray-50">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-semibold text-center text-gray-800 mb-12">주요 기능 ✨</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- Feature 1 -->
+                <div class="feature-card bg-white rounded-xl p-6 hover-scale">
+                    <div class="text-4xl text-indigo-600 mb-4">💡</div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">AI 증상 분석</h3>
+                    <p class="text-gray-700">입력한 증상을 AI가 분석하여 관련 진료과를 추천합니다.<br>
+                        “어디 병원에 가야 할지 모를 때, AI가 빠르게 도와드립니다.”</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-card bg-white rounded-xl p-6 hover-scale">
+                    <div class="text-4xl text-green-600 mb-4">📍</div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">가까운 병원 찾기</h3>
+                    <p class="text-gray-700">현재 위치를 기반으로 가까운 병원과 진료 가능 여부를 제공합니다.
+                        <br>“내 증상에 맞는 병원이 어디인지 바로 찾아보세요!”</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-card bg-white rounded-xl p-6 hover-scale">
+                    <div class="text-4xl text-red-600 mb-4">⏱️</div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">빠르고 간편한 사용</h3>
+                    <p class="text-gray-700">검색할 필요 없이 채팅으로 증상을 설명하면 즉시 해결됩니다.<br>
+                        “복잡한 검색 없이, AI와 대화하며 병원 정보를 받아보세요.”</p>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-16 bg-gray-50">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-semibold text-center text-gray-800 mb-12">가격 정책 💰</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 justify-evenly">
+
+                <!-- Basic Plan -->
+                <div class="bg-white rounded-xl p-6 hover-scale">
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-4">베이직</h3>
+                    <div class="text-4xl font-bold text-indigo-600 mb-4">무료</div>
+                    <p class="text-gray-700 mb-6">기본 증상 분석 및 진료과 추천</p>
+                    <button class="bg-gray-200 text-gray-600 font-bold py-2 px-6 rounded-full w-full cursor-not-allowed">
+                        체험하기
+                    </button>
+                </div>
+
+                <!-- Standard Plan -->
+                <div class="bg-white rounded-xl p-6 hover-scale">
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-4">스탠다드</h3>
+                    <div class="text-4xl font-bold text-green-600 mb-4">5,000원/월</div>
+                    <p class="text-gray-700 mb-6">AI 증상 분석, 병원 정보 제공, 광고 제거</p>
+                    <button 
+                        class="bg-gradient-custom text-white font-bold py-2 px-6 rounded-full w-full hover:bg-green-700"
+                        onclick="scrollToSection('contact')"
+                    >
+                        구독하기
+                    </button>
+                </div>
+
+
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+<!-- Download Section -->
+<!-- Download Section -->
+<section id="download" class="py-16">
+    <div class="container mx-auto text-center">
+        <h2 class="text-3xl font-semibold text-gray-800 mb-8">지금 바로 다운로드 📱</h2>
+        <p class="text-lg text-gray-700 mb-8">
+            AI와 대화하며 증상을 입력하세요! 맞춤형 진료과 추천과 가까운 병원 정보를 빠르게 받아보세요
+        </p>
+        <div class="flex justify-center space-x-6 items-center">
+                <button onclick="scrollToSection('contact')"><img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" 
+                    alt="Download on the App Store" class="h-13 w-auto block mx-auto"></button>
+                <button onclick="scrollToSection('contact')"><img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" 
+                    alt="Get it on Google Play" class="h-14 w-auto block mx-auto"></button>
+        </div>
+    </div>
+</section>
+
+
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-gray-50">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-semibold text-center text-gray-800 mb-8">✉️ 사전예약 모집 !</h2>
+            <p class="text-lg text-gray-700 text-center mb-8">
+                앱이 출시되면 가장 먼저 알림을 받고, 무료 AI 건강 상담을 경험하세요.
+            </p>
+            <form id="reservationForm" class="max-w-lg mx-auto">
+                <div class="mb-4">
+                    <label for="name" class="block text-gray-700 text-sm font-bold mb-2">이름</label>
+                    <input type="text" id="name" name="name" required 
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                        placeholder="이름을 입력해주세요." autocomplete="off">
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-700 text-sm font-bold mb-2">이메일</label>
+                    <input type="email" id="email" name="email" required pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}"
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                        placeholder="이메일 주소를 입력해주세요." autocomplete="off">
+                </div>
+                <div class="mb-6">
+                    <label for="message" class="block text-gray-700 text-sm font-bold mb-2">메시지 (선택)</label>
+                    <textarea id="message" name="message" rows="4" 
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                        placeholder="문의 내용을 입력해주세요."></textarea>
+                </div>
+                <!-- 개인정보 수집 동의 체크박스 -->
+         <!-- 개인정보 수집 동의 체크박스에 id 추가 -->
+         <div class="max-w-xl mx-auto text-sm text-gray-700 mt-6">
+            <label class="flex items-center space-x-2 mb-2">
+              <input type="checkbox" id="policyConsent" required>
+              <span>개인정보 수집 및 이용에 동의합니다.</span>
+              <button type="button" onclick="togglePolicy()" class="text-blue-600 underline ml-2">
+                [자세히 보기]
+              </button>
+            </label>
+            <!-- 펼쳐지는 내용 -->
+            <div id="policy" class="bg-gray-50 border border-gray-200 rounded p-4 mt-2 hidden">
+              <p class="mb-2"><strong>✅ 수집 항목:</strong> 이메일 주소, 이름, 문의 내용(선택)</p>
+              <p class="mb-2"><strong>✅ 수집 목적:</strong> 앱 수요 설문조사</p>
+              <p class="mb-2"><strong>✅ 보유 기간:</strong> 6개월 이내 삭제</p>
+              <p class="mb-2"><strong>✅ 동의 거부 시:</strong> 사전예약은 불가능하나 서비스 이용에는 제한 없음</p>
+              <p class="mb-2"><strong>✅ 문의처:</strong> junu120707@gachon.ac.kr</p>
+            </div>
+          </div>
+          <div class="flex items-center justify-between">
+            <!-- 제출 버튼에 id 추가 -->
+            <button type="submit" id="submitBtn"
+                    class="bg-gradient-custom text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline hover-scale">
+              보내기
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto text-center">
+            <p>&copy; 본 페이지는 설문조사를 위한 페이지 입니다.</p>
+            <p class="mt-2">문의: junu120707@gachon.ac.kr</p>
+        </div>
+    </footer>
+
+    <script>
+    // "자세히 보기" 버튼 클릭 시 개인정보 처리방침 열기/닫기 (id="policy" 요소 사용)
+    function togglePolicy() {
+        const policy = document.getElementById('policy');
+        policy.classList.toggle('hidden');
+    }
+    
+    // 체크박스 상태에 따라 "보내기" 버튼 활성/비활성화 (id="policyConsent"와 id="submitBtn" 사용)
+    const policyCheckbox = document.getElementById('policyConsent');
+    const submitBtn = document.getElementById('submitBtn');
+    
+    policyCheckbox.addEventListener('change', () => {
+        if (policyCheckbox.checked) {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('disabled');
+        } else {
+        submitBtn.disabled = true;
+        submitBtn.classList.add('disabled');
+        }
+    });
+    
+    // 폼 제출 이벤트 (AJAX 방식)
+    document.getElementById('reservationForm').addEventListener('submit', async (event) => {
+        event.preventDefault(); // 폼의 기본 제출 막기 (페이지 이동 X)
+            // 개인정보 동의 체크 여부 확인
+        if (!document.getElementById('policyConsent').checked) {
+            alert('개인정보 수집 및 이용에 동의해주세요.');
+            return; // 전송 중단
+        }
+        // 입력값 수집
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+    
+        // 서버로 전송할 데이터 객체
+        const data = { name, email, message };
+    
+        try {
+        // 서버에 POST 요청 (URL은 실제 서버 주소로 변경)
+        const response = await fetch('http://localhost:3000/api/reservations', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+        });
+    
+        if (response.ok) {
+            // 응답이 200~299 범위이면 성공
+            alert('제출되었습니다!');
+            // 페이지 새로고침
+            window.location.reload();
+        } else {
+            // 에러 처리
+            alert('오류가 발생했습니다. 다시 시도해주세요.');
+        }
+        } catch (error) {
+        console.error('에러 발생:', error);
+        alert('서버와 통신 중 문제가 발생했습니다.');
+        }
+    });
+    
+    // 부드러운 스크롤 기능
+    function scrollToSection(sectionId) {
+        const section = document.getElementById(sectionId);
+        if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+        }
+    }
+    
+    // IntersectionObserver를 이용하여 섹션이 화면에 들어오면 active 클래스 추가 (애니메이션 효과)
+    const sections = document.querySelectorAll('section');
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target);
+        }
+        });
+    }, {
+        threshold: 0.2
+    });
+    
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+    </script>
+    
+
+</body>
+</html>
