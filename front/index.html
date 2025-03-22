@@ -5,7 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🤖 증상 입력만 하면 AI가 진료과와 병원을 안내합니다!</title>
+    <meta property="op:title" content="AI 진료과 추천 서비스" />
+    <meta property="op:description" content="어디 아픈데… 무슨 과에 가야 할지 모르겠다면?" />
+    <meta property="op:image" content="/app.png" />
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FRR9ZMY17K"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-FRR9ZMY17K');
+    </script>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -259,18 +271,19 @@
                 <div class="max-w-xl mx-auto text-sm text-gray-700 mt-6">
                     <label class="flex items-center space-x-2 mb-2">
                         <input type="checkbox" id="policyConsent" required>
-                        <span>개인정보 수집 및 이용에 동의합니다.</span>
+                        <span>아래 내용을 확인하였으며 개인정보 수집 및 이용에 동의합니다.</span>
                         <button type="button" onclick="togglePolicy()" class="text-blue-600 underline ml-2">
                             [자세히 보기]
                         </button>
                     </label>
                     <!-- 펼쳐지는 내용 -->
                     <div id="policy" class="bg-gray-50 border border-gray-200 rounded p-4 mt-2 hidden">
-                        <p class="mb-2"><strong>✅ 수집 항목:</strong> 이메일 주소, 이름, 문의 내용(선택)</p>
-                        <p class="mb-2"><strong>✅ 수집 목적:</strong> 앱 수요 설문조사</p>
-                        <p class="mb-2"><strong>✅ 보유 기간:</strong> 6개월 이내 삭제</p>
-                        <p class="mb-2"><strong>✅ 동의 거부 시:</strong> 사전예약은 불가능하나 서비스 이용에는 제한 없음</p>
-                        <p class="mb-2"><strong>✅ 문의처:</strong> junu120707@gachon.ac.kr</p>
+                        <p class="mb-2"><strong>✅ 수집 항목 :</strong> 이메일 주소, 이름, 문의 내용(선택)</p>
+                        <p class="mb-2"><strong>✅ 수집 목적 :</strong> 앱 수요 설문조사 및 사전예약 응답 처리</p>
+                        <p class="mb-2"><strong>✅ 수집 주체 :</strong> 가천대학교 GCS 6기 김준우우</p>
+                        <p class="mb-2"><strong>✅ 보유 및 이용 기간 :</strong> 수집일로부터 1개월 이내 파기</p>
+                        <p class="mb-2"><strong>✅ 동의 거부 시 불이익 :</strong> 사전예약은 불가능하나, 향후 정식 서비스 이용에는 제한 없음</p>
+                        <p class="mb-2"><strong>✅ 문의처 :</strong> junu120707@gachon.ac.kr</p>
                     </div>
                 </div>
                 <div class="flex items-center justify-between">
@@ -287,7 +300,8 @@
     <footer class="bg-gray-900 text-white py-8">
         <div class="container mx-auto text-center">
             <p>&copy; 본 페이지는 설문조사를 위한 페이지 입니다.</p>
-            <p class="mt-2">문의: junu120707@gachon.ac.kr</p>
+            <p class="mt-2">문의 : junu120707@gachon.ac.kr</p>
+            <p>OpenGrape design resource by <a href="https://www.freepik.com" target="_blank">Freepik</a></p>
         </div>
     </footer>
 
