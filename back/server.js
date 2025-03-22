@@ -7,13 +7,21 @@ const { createClient } = require('@supabase/supabase-js');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Supabase 클라이언트 생성
+// ✅ CORS 설정 - 프론트엔드 주소만 허용
+app.use(cors({
+    origin: 'https://surveyaihealthcare.vercel.app',
+    methods: ['POST', 'GET'],
+    credentials: true
+}));
+
+// ✅ Supabase 클라이언트 생성
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
 
+// ✅ 미들웨어
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
 
+// ✅ 예약 저장 API
 app.post('/api/reservations', async (req, res) => {
     const { name, email, message } = req.body;
     if (!name || !email) {
@@ -32,6 +40,7 @@ app.post('/api/reservations', async (req, res) => {
     res.status(201).json({ message: '예약 저장 성공!', reservation: data[0] });
 });
 
+// ✅ 서버 시작
 app.listen(port, () => {
     console.log(`✅ 서버 실행 중 (포트: ${port})`);
 });
