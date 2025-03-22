@@ -44,31 +44,30 @@ app.get('/ping', (req, res) => {
 // =====================
 // 5) 예약 API
 // =====================
-app.post('/api/reservations', async (req, res, next) => {
+app.post('/api/reservations', async (req, res) => {
+    const { name, email, message } = req.body;
+    if (!name || !email) {
+        return res.status(400).json({ error: '이름과 이메일은 필수입니다.' });
+    }
+
     try {
-        const { name, email, message } = req.body;
-
-        // 필수 값 확인
-        if (!name || !email) {
-            return res.status(400).json({ error: '이름과 이메일은 필수입니다.' });
-        }
-
-        // Supabase에 데이터 삽입
         const { data, error } = await supabase
             .from('reservations')
             .insert([{ name, email, message }]);
+        // .select('*');  // 안 써도 OK
 
         if (error) {
-            console.error("❌ Supabase 저장 오류:", error);
+            console.error("Supabase 저장 오류:", error);
             return res.status(500).json({ error: '데이터 저장 중 오류 발생' });
         }
 
-        res.status(201).json({ message: '예약 저장 성공!', reservation: data[0] });
+        // data[0] 같은 건 참조하지 않고, 그냥 성공만 알려줌
+        return res.status(201).json({ message: '예약 저장 성공!' });
     } catch (err) {
-        next(err);
+        console.error('서버 내부 오류:', err);
+        return res.status(500).json({ error: '서버 내부 오류' });
     }
 });
-
 // =====================
 // 6) 에러 핸들러 (CORS 헤더를 포함하여 에러 응답 전송)
 // =====================
